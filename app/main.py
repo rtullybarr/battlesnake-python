@@ -1,6 +1,6 @@
 import bottle
 import os
-import random
+import collisions
 
 
 
@@ -29,26 +29,55 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#00FF00',
+        'color': '#FF0000',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url,
-        'name': 'battlesnake-python'
+        'name': 'danger-noodle',
+        'head_type': 'tongue',
+        'tail_type': 'freckled',
+        'secondary_color': '#FFFF00'
     }
 
 
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-
-    # TODO: Do things with data
     
     directions = ['up', 'down', 'left', 'right']
-    direction = random.choice(directions)
-    print direction
+    direction_weights = choose_direction(data)
+    print direction_weights
+
+    # get index of maximum value in direction_weights
+    index = direction_weights.index(min(direction_weights))
+
     return {
-        'move': direction,
-        'taunt': 'battlesnake-python!'
+        'move': directions[index],
+        'taunt': 'noodly noodly'
     }
+
+
+def choose_direction(data):
+    # pick a direction to move
+    weights = []
+
+    # The direction weights and decision weights added at the same time,
+    weights += collisions.avoid_walls(data)
+    weights += collisions.avoid_other_snakes(data)
+
+    return combine_weights(weights)
+
+
+def combine_weights(weights):
+    # combine weights produced by each factor according to their weight
+    combined_weights = [1, 1, 1, 1]
+
+    for criteria in weights:
+        criteria_weight = criteria["weight"]
+        direction_values = criteria["direction_values"]
+        direction_values = [x*criteria_weight for x in direction_values]
+        combined_weights = [x*y for x, y in zip(combined_weights, direction_values)]
+
+    return combined_weights
 
 
 # Expose WSGI app (so gunicorn can find it)
