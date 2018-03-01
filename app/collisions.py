@@ -14,22 +14,21 @@ def avoid_walls(data):
     us = data["you"]
     # first point in list is our head.
     head_location = us["body"]["data"][0]
-    print("Our location: " + str(head_location))
 
     # possible directions we can move
-    directions = [1, 1, 1, 1]
+    directions = [1.0, 1.0, 1.0, 1.0]
 
     if head_location["x"] + 1 >= data["width"]:
-        directions[RIGHT] = 0
+        directions[RIGHT] = 0.0
 
     if head_location["x"] - 1 < 0:
-        directions[LEFT] = 0
+        directions[LEFT] = 0.0
 
     if head_location["y"] + 1 >= data["height"]:
-        directions[DOWN] = 0
+        directions[DOWN] = 0.0
 
     if head_location["y"] - 1 < 0:
-        directions[UP] = 0
+        directions[UP] = 0.0
 
     # normalize weighting matrix
     criteria["direction_values"] = [x / sum(directions) for x in directions]
@@ -58,7 +57,7 @@ def avoid_other_snakes(data):
     other_snakes.append(us)
 
     # possible directions we can move
-    directions = [1, 1, 1, 1]
+    directions = [1.0, 1.0, 1.0, 1.0]
 
     for snake in other_snakes:
         for point in snake["body"]["data"]:
