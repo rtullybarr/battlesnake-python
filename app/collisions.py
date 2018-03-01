@@ -60,7 +60,7 @@ def avoid_other_snakes(data):
     directions = [1, 1, 1, 1]
 
     for snake in other_snakes:
-        for point in snake["body"]:
+        for point in snake["body"]["data"]:
             for i in range(4):
                 if moves[i][0] == point["x"] and moves[i][1] == point["y"]:
                     directions[i] = 0
