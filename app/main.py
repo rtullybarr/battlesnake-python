@@ -55,11 +55,11 @@ def move():
 
 def choose_direction(data):
     # pick a direction to move
-    weights = []
+    weights = list()
 
     # The direction weights and decision weights added at the same time,
-    weights += collisions.avoid_walls(data)
-    weights += collisions.avoid_other_snakes(data)
+    weights.append(collisions.avoid_walls(data))
+    weights.append(collisions.avoid_other_snakes(data))
 
     print(weights)
 
