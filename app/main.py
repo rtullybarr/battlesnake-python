@@ -36,16 +36,15 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-
-    print("data received: ")
     
     directions = ['up', 'down', 'left', 'right']
     direction_weights = choose_direction(data)
-    print direction_weights
+    print(direction_weights)
 
     # get index of maximum value in direction_weights
     index = direction_weights.index(min(direction_weights))
 
+    print(index)
     return {
         'move': directions[index],
         'taunt': 'noodly noodly'
