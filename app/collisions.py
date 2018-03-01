@@ -46,10 +46,10 @@ def avoid_other_snakes(data):
 
     # spots we could move:
 
-    moves = [(head_location["x"], head_location["y"] - 1), #up
-             (head_location["x"], head_location["y"] + 1), #down
-             (head_location["x"] - 1, head_location["y"]), #left
-             (head_location["x"] + 1, head_location["y"])] #right
+    moves = [(head_location["x"], head_location["y"] - 1),  # up
+             (head_location["x"], head_location["y"] + 1),  # down
+             (head_location["x"] - 1, head_location["y"]),  # left
+             (head_location["x"] + 1, head_location["y"])]  # right
 
     # other snakes
     other_snakes = data["snakes"]["data"]
@@ -60,7 +60,7 @@ def avoid_other_snakes(data):
     directions = [1, 1, 1, 1]
 
     for snake in other_snakes:
-        for point in snake:
+        for point in snake["body"]:
             for i in range(4):
                 if moves[i][0] == point["x"] and moves[i][1] == point["y"]:
                     directions[i] = 0
