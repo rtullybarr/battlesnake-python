@@ -17,20 +17,15 @@ def static(path):
 @bottle.post('/start')
 def start():
     data = bottle.request.json
-    game_id = data.get('game_id')
-    board_width = data.get('width')
-    board_height = data.get('height')
 
-    head_url = '%s://%s/static/head.png' % (
+    head_url = '%s://%s/static/fhead.png' % (
         bottle.request.urlparts.scheme,
         bottle.request.urlparts.netloc
     )
 
-    # TODO: Do things with data
-
     return {
         'color': '#FF0000',
-        'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
+        'taunt': 'noodly noodly',
         'head_url': head_url,
         'name': 'danger-noodle',
         'head_type': 'tongue',

@@ -54,7 +54,7 @@ def avoid_other_snakes(data):
     # other snakes
     other_snakes = data["snakes"]["data"]
     # avoid our own body too
-    other_snakes.appent(us)
+    other_snakes.append(us)
 
     # possible directions we can move
     directions = [1, 1, 1, 1]
