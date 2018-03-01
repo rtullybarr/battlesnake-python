@@ -13,7 +13,7 @@ def static(path):
     return bottle.static_file(path, root='static/')
 
 
-@bottle.route('/start', method=['POST'])
+@bottle.post('/start')
 def start():
     data = bottle.request.json
 
@@ -36,6 +36,8 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+
+    print(data)
     
     directions = ['up', 'down', 'left', 'right']
     direction_weights = choose_direction(data)
