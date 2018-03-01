@@ -1,6 +1,7 @@
 import bottle
 import os
 import collisions
+import random
 
 
 @bottle.route('/')
@@ -38,11 +39,11 @@ def move():
     data = bottle.request.json
     
     directions = ['up', 'down', 'left', 'right']
-    direction_weights = choose_direction(data)
+    direction_weights = get_direction_weights(data)
     print(direction_weights)
 
     # get index of maximum value in direction_weights
-    index = direction_weights.index(min(direction_weights))
+    index = choose_direction(direction_weights)
 
     print(index)
     return {
@@ -51,7 +52,15 @@ def move():
     }
 
 
-def choose_direction(data):
+def choose_direction(weights):
+    best_weight = max(weights)
+    good_directions = [i for i, x in enumerate(weights) if x == best_weight]
+
+    # If multiple equivalent directions exist, pick one at random.
+    return random.choice(good_directions)
+
+
+def get_direction_weights(data):
     # pick a direction to move
     weights = list()
 
