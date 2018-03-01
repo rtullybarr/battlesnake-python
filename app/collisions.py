@@ -7,13 +7,14 @@ RIGHT = 3
 
 # set of weighting fuctions designed to help us avoid collisions.
 def avoid_walls(data):
-    criteria = {"goal": "avoid_walls", "weight": 0.5}
+    criteria = {"goal": "avoid_walls", "weight": 1}
     # walls: places with x, y outside the game area
 
     # where we are
     us = data["you"]
     # first point in list is our head.
     head_location = us["body"]["data"][0]
+    print("Our location: " + str(head_location))
 
     # possible directions we can move
     directions = [1, 1, 1, 1]
