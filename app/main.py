@@ -3,7 +3,6 @@ import os
 import collisions
 
 
-
 @bottle.route('/')
 def static():
     return "the server is running"
@@ -14,7 +13,7 @@ def static(path):
     return bottle.static_file(path, root='static/')
 
 
-@bottle.post('/start')
+@bottle.route('/start', method=['POST'])
 def start():
     data = bottle.request.json
 
@@ -83,4 +82,4 @@ if __name__ == '__main__':
         application,
         host=os.getenv('IP', '0.0.0.0'),
         port=os.getenv('PORT', '8080'),
-        debug = True)
+        debug=True)
