@@ -43,7 +43,13 @@ def move():
     print(direction_weights)
 
     # get index of maximum value in direction_weights
-    index = choose_direction(direction_weights)
+    max_weight, index = choose_direction(direction_weights)
+
+    if max_weight == 0:
+        return {
+            'move': directions[index],
+            'taunt': 'x___x'
+        }
 
     print(index)
     return {
@@ -57,7 +63,7 @@ def choose_direction(weights):
     good_directions = [i for i, x in enumerate(weights) if x == best_weight]
 
     # If multiple equivalent directions exist, pick one at random.
-    return random.choice(good_directions)
+    return best_weight, random.choice(good_directions)
 
 
 def get_direction_weights(data):
