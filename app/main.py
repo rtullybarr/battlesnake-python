@@ -38,7 +38,6 @@ def move():
     data = bottle.request.json
 
     print("data received: ")
-    print(data)
     
     directions = ['up', 'down', 'left', 'right']
     direction_weights = choose_direction(data)

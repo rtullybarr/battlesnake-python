@@ -32,8 +32,6 @@ def avoid_walls(data):
 
     # normalize weighting matrix
     criteria["direction_values"] = [x / sum(directions) for x in directions]
-    print("returning:")
-    print(criteria)
     return criteria
 
 
@@ -68,7 +66,5 @@ def avoid_other_snakes(data):
                     directions[i] = 0
 
     # normalize and return
-    criteria["decision_values"] = [x / sum(directions) for x in directions]
-    print("returning:")
-    print(criteria)
+    criteria["direction_values"] = [x / sum(directions) for x in directions]
     return criteria
