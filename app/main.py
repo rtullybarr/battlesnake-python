@@ -66,7 +66,7 @@ def choose_direction(data):
 
 def combine_weights(weights):
     # combine weights produced by each factor according to their weight
-    combined_weights = [1, 1, 1, 1]
+    combined_weights = [1.0, 1.0, 1.0, 1.0]
 
     for criteria in weights:
         criteria_weight = criteria["weight"]
