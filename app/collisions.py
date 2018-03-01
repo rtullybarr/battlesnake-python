@@ -7,7 +7,7 @@ RIGHT = 3
 
 # set of weighting fuctions designed to help us avoid collisions.
 def avoid_walls(data):
-    criteria = {"weight": 0.5}
+    criteria = {"goal": "avoid_walls", "weight": 0.5}
     # walls: places with x, y outside the game area
 
     # where we are
@@ -36,7 +36,7 @@ def avoid_walls(data):
 
 
 def avoid_other_snakes(data):
-    criteria = {"weight": 0.5}
+    criteria = {"goal": "avoid_other_snakes", "weight": 0.5}
     # walls: places with x, y outside the game area
 
     # where we are

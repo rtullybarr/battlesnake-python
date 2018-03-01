@@ -61,6 +61,8 @@ def choose_direction(data):
     weights += collisions.avoid_walls(data)
     weights += collisions.avoid_other_snakes(data)
 
+    print(weights)
+
     return combine_weights(weights)
 
 
@@ -69,6 +71,7 @@ def combine_weights(weights):
     combined_weights = [1, 1, 1, 1]
 
     for criteria in weights:
+        print(criteria)
         criteria_weight = criteria["weight"]
         direction_values = criteria["direction_values"]
         direction_values = [x*criteria_weight for x in direction_values]
