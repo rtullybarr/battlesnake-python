@@ -42,7 +42,8 @@ def avoid_other_snakes(data):
     # where we are
     us = data["you"]
     # first point in list is our head.
-    head_location = us["body"]["data"][0]
+    us_points = us["body"]["data"]
+    head_location = us_points[0]
 
     # spots we could move:
 
@@ -60,7 +61,33 @@ def avoid_other_snakes(data):
     directions = [1.0, 1.0, 1.0, 1.0]
 
     for snake in other_snakes:
-        for point in snake["body"]["data"]:
+        snake_points = snake["body"]["data"]
+        for index, point in enumerate(snake_points):
+
+            # special handling for enemy snake heads
+            if index == 0:
+
+                weight = 0
+                if len(snake_points) < len(us_points):
+                    weight = 2
+
+                for i in range(4):
+                    # they move up
+                    if moves[i][0] == point["x"] and moves[i][1] == point["y"] - 1:
+                        directions[i] = weight
+
+                    # they move down
+                    if moves[i][0] == point["x"] and moves[i][1] == point["y"] + 1:
+                        directions[i] = weight
+
+                    # they move left
+                    if moves[i][0] == point["x"] - 1 and moves[i][1] == point["y"]:
+                        directions[i] = weight
+
+                    # they move right
+                    if moves[i][0] == point["x"] + 1 and moves[i][1] == point["y"]:
+                        directions[i] = weight
+
             for i in range(4):
                 if moves[i][0] == point["x"] and moves[i][1] == point["y"]:
                     directions[i] = 0
