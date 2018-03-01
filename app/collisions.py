@@ -7,7 +7,7 @@ RIGHT = 3
 
 # set of weighting fuctions designed to help us avoid collisions.
 def avoid_walls(data):
-    criteria = {"goal": "avoid_walls", "weight": 1}
+    criteria = {"goal": "avoid_walls", "weight": 0.5}
     # walls: places with x, y outside the game area
 
     # where we are
