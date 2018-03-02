@@ -47,7 +47,6 @@ def execute_move(data):
     
     directions = ['up', 'down', 'left', 'right']
     direction_weights = get_direction_weights(data)
-    print(direction_weights)
 
     # get index of maximum value in direction_weights
     max_weight, index = choose_direction(direction_weights)
@@ -58,10 +57,10 @@ def execute_move(data):
             'taunt': 'x___x'
         }
 
-    print(index)
     return {
         'move': directions[index],
-        'taunt': 'noodly noodly'
+        'taunt': str.format("up: {0:.2f}, down: {1:.2f}, left: {2:.2f}, right: {3:.2f}",
+                            direction_weights[0], direction_weights[1], direction_weights[2], direction_weights[3])
     }
 
 
@@ -82,8 +81,6 @@ def get_direction_weights(data):
     weights.append(collisions.avoid_other_snakes(data))
     weights.append(freedom.move_to_most_space(data))
 
-    print(weights)
-
     return combine_weights(weights)
 
 
@@ -97,7 +94,10 @@ def combine_weights(weights):
         direction_values = [x*criteria_weight for x in direction_values]
         combined_weights = [x*y for x, y in zip(combined_weights, direction_values)]
 
-    return combined_weights
+    if sum(combined_weights) == 0:
+        return [0.0, 0.0, 0.0, 0.0]
+
+    return [x/sum(combined_weights) for x in combined_weights]
 
 
 # Expose WSGI app (so gunicorn can find it)
