@@ -1,24 +1,18 @@
-import movement
-import collisions
-import freedom
 import main
+import time
 
 
 def run_tests(data):
-    print("avoid_walls")
-    print(collisions.avoid_walls(data))
 
-    print("avoid_other_snakes")
-    print(collisions.avoid_other_snakes(data))
-
-    print("get_grid")
-    print(movement.get_grid(data))
-
-    print("move_to_most_space")
-    print(freedom.move_to_most_space(data))
+    start = time.time()
 
     print("make sure move throws no errors")
     print(main.execute_move(data))
+
+    end = time.time()
+
+    print("took " + str(end - start) + " seconds")
+
 
 if __name__ == "__main__":
 
