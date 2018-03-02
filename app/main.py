@@ -39,6 +39,11 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+
+    execute_move(data)
+
+    
+def execute_move(data):
     
     directions = ['up', 'down', 'left', 'right']
     direction_weights = get_direction_weights(data)

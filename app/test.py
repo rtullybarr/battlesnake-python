@@ -1,6 +1,7 @@
 import movement
 import collisions
 import freedom
+import main
 
 
 def run_tests(data):
@@ -16,6 +17,8 @@ def run_tests(data):
     print("move_to_most_space")
     print(freedom.move_to_most_space(data))
 
+    print("make sure move throws no errors")
+    print(main.execute_move(data))
 
 if __name__ == "__main__":
 
