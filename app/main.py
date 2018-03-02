@@ -80,7 +80,7 @@ def get_direction_weights(data):
     # The direction weights and decision weights added at the same time,
     weights.append(collisions.avoid_walls(data))
     weights.append(collisions.avoid_other_snakes(data))
-    weights.append(freedom.move_to_most_space(data))
+    #weights.append(freedom.move_to_most_space(data))
 
     print(weights)
 
