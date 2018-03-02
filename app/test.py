@@ -11,7 +11,7 @@ def run_tests(data):
 
     end = time.time()
 
-    print("took " + str(end - start) + " seconds")
+    print(str.format("took {0:.1f} ms", (end - start)*1000))
 
 
 if __name__ == "__main__":
