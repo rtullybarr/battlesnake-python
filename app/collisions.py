@@ -1,31 +1,9 @@
+from movement import UP, DOWN, LEFT, RIGHT, points_equal, move_point
 
-UP = 0
-DOWN = 1
-LEFT = 2
-RIGHT = 3
-
-
-# checks if two points are equal
-def points_equal(p1, p2):
-    return p1["x"] == p2["x"] and p1["y"] == p2["y"]
-
-
-# returns a new point that has been shifted one step in the given direction.
-def move_point(point, direction):
-    new_point = dict(point)
-    if direction == UP:
-        new_point["y"] -= 1
-    if direction == DOWN:
-        new_point["y"] += 1
-    if direction == LEFT:
-        new_point["x"] -= 1
-    if direction == RIGHT:
-        new_point["x"] += 1
-    return new_point
 
 # set of weighting fuctions designed to help us avoid collisions.
 def avoid_walls(data):
-    criteria = {"goal": "avoid_walls", "weight": 0.5}
+    criteria = {"goal": "avoid_walls", "weight": 0.4}
     # walls: places with x, y outside the game area
 
     # where we are
@@ -58,7 +36,7 @@ def avoid_walls(data):
 
 
 def avoid_other_snakes(data):
-    criteria = {"goal": "avoid_other_snakes", "weight": 0.5}
+    criteria = {"goal": "avoid_other_snakes", "weight": 0.4}
     # walls: places with x, y outside the game area
 
     # where we are
@@ -74,8 +52,8 @@ def avoid_other_snakes(data):
 
     # other snakes
     other_snakes = data["snakes"]["data"]
-    # avoid our own body too
-    other_snakes.append(us)
+    # unnecessary - we're already in the list of other snakes
+    #other_snakes.append(us)
 
     # possible directions we can move
     directions = [1.0, 1.0, 1.0, 1.0]
