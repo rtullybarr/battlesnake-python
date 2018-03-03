@@ -1,4 +1,4 @@
-from movement import UP, DOWN, LEFT, RIGHT, points_equal, move_point
+from movement import UP, DOWN, LEFT, RIGHT, points_equal, move_point, move_towards
 
 
 # set of weighting fuctions designed to help us avoid collisions.
@@ -78,6 +78,23 @@ def avoid_other_snakes(data, weight):
             for i in range(4):
                 if points_equal(moves[i], point):
                     directions[i] = 0.0
+
+    # normalize and return
+    if sum(directions) == 0:
+        criteria["direction_values"] = [0.0, 0.0, 0.0, 0.0]
+    else:
+        criteria["direction_values"] = [x / sum(directions) for x in directions]
+
+    return criteria
+
+
+def follow_tail(data, weight):
+    criteria = {"goal": "follow_our_tail", "weight": weight}
+
+    head = data["you"]["data"]["body"]["data"][0]
+    tail = data["you"]["data"]["body"]["data"][-1]
+
+    directions = move_towards(head, tail)
 
     # normalize and return
     if sum(directions) == 0:
