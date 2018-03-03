@@ -85,6 +85,8 @@ def get_direction_weights(data):
     weights.append(freedom.move_to_most_space(data, 8))
     weights.append(food.nearest_food_simple(data, 3))
 
+    print(weights)
+
     return combine_weights_add(weights)
 
 
