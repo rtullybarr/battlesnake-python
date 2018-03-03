@@ -1,5 +1,6 @@
 import movement
 import numpy as np
+import collections
 
 
 def move_to_most_space(data):
@@ -21,40 +22,54 @@ def move_to_most_space(data):
     return criteria
 
 
-def empty_or_food(point, grid):
-    shape = grid.shape
-    if point["x"] < 0 or point["x"] >= shape[0]:
-        return False
-
-    if point["y"] < 0 or point["y"] >= shape[1]:
-        return False
-
-    if grid[point["x"]][point["y"]] == movement.SNAKE:
-        return False
-
-    if grid[point["x"]][point["y"]] == movement.VISITED:
-        return False
-
-    return True
-
-
 def reachable_area(head, grid):
 
     # replace with queue impl
-    unvisited = list()
+    unvisited = collections.deque()
     unvisited.append(head)
     visited_area = 0
 
     while len(unvisited) > 0:
         point = unvisited.pop()
 
-        if empty_or_food(point, grid):
+        empty_or_food = True
+
+        shape = grid.shape
+        if point["x"] < 0 or point["x"] >= shape[0]:
+            empty_or_food = False
+
+        if point["y"] < 0 or point["y"] >= shape[1]:
+            empty_or_food = False
+
+        if grid[point["x"]][point["y"]] == movement.SNAKE:
+            empty_or_food = False
+
+        if grid[point["x"]][point["y"]] == movement.VISITED:
+            empty_or_food = False
+
+        if empty_or_food:
             grid[point["x"]][point["y"]] = movement.VISITED
             visited_area += 1
 
             for i in range(4):
                 new_point = movement.move_point(point, i)
-                if empty_or_food(new_point, grid):
+
+                empty_or_food = True
+
+                shape = grid.shape
+                if point["x"] < 0 or point["x"] >= shape[0]:
+                    empty_or_food = False
+
+                if point["y"] < 0 or point["y"] >= shape[1]:
+                    empty_or_food = False
+
+                if grid[point["x"]][point["y"]] == movement.SNAKE:
+                    empty_or_food = False
+
+                if grid[point["x"]][point["y"]] == movement.VISITED:
+                    empty_or_food = False
+
+                if empty_or_food:
                     unvisited.append(new_point)
 
     return visited_area
