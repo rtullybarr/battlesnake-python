@@ -63,6 +63,8 @@ def get_grid(data):
     grid = np.zeros((data["width"], data["height"]))
 
     for snake in data["snakes"]["data"]:
+        if snake["health"] <= 0:
+            continue
         for i, point in enumerate(snake["body"]["data"]):
             grid[point["x"], point["y"]] = SNAKE
 
