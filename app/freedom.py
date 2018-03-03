@@ -4,7 +4,7 @@ import collections
 
 
 def move_to_most_space(data, weight):
-    criteria = {"goal": "move_to_most_space", "weight": 0.2}
+    criteria = {"goal": "move_to_most_space", "weight": weight}
 
     directions = [1.0, 1.0, 1.0, 1.0]
 
