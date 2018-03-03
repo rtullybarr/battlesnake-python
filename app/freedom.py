@@ -35,6 +35,8 @@ def empty_or_food(point, grid):
     if grid[point["x"]][point["y"]] == movement.VISITED:
         return False
 
+    return True
+
 
 def reachable_area(head, grid):
 
