@@ -94,7 +94,7 @@ def get_direction_weights(data):
     if our_snake < longest_snake:
         food_priority = 7
     else:
-        food_priority = (1 / data["you"]["health"]) * 10
+        food_priority = (1.0 / data["you"]["health"]) * 10
 
     weights.append(food.nearest_food_simple(data, food_priority))
 
