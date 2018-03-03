@@ -81,9 +81,9 @@ def get_direction_weights(data):
 
     # The direction weights and decision weights added at the same time,
     weights.append(collisions.avoid_walls(data, 1))
-    weights.append(collisions.avoid_other_snakes(data, 10))
-    weights.append(freedom.move_to_most_space(data, 8))
-    weights.append(food.nearest_food_simple(data, 3))
+    weights.append(collisions.avoid_other_snakes(data, 4))
+    weights.append(freedom.move_to_most_space(data, 3))
+    weights.append(food.nearest_food_simple(data, 2))
 
     print(weights)
 
@@ -118,7 +118,7 @@ def combine_weights_add(weights):
             new_val = direction_values[i]*criteria_weight
             if new_val == 0:
                 combined_weights[i] = 0
-            elif combined_weights[0] != 0:
+            elif combined_weights[i] != 0:
                 combined_weights[i] += new_val
 
     if sum(combined_weights) == 0:
