@@ -85,10 +85,10 @@ def get_direction_weights(data):
     weights.append(freedom.move_to_most_space(data, 8))
     weights.append(food.nearest_food_simple(data, 3))
 
-    return combine_weights(weights)
+    return combine_weights_add(weights)
 
 
-def combine_weights(weights):
+def combine_weights_multiply(weights):
     # combine weights produced by each factor according to their weight
     combined_weights = [1.0, 1.0, 1.0, 1.0]
 
@@ -103,6 +103,23 @@ def combine_weights(weights):
 
     return [x/sum(combined_weights) for x in combined_weights]
 
+
+def combine_weights_add(weights):
+    # combine weights produced by each factor according to their weight
+    combined_weights = [1.0, 1.0, 1.0, 1.0]
+
+    for criteria in weights:
+        criteria_weight = criteria["weight"]
+        direction_values = criteria["direction_values"]
+        direction_values = [x*criteria_weight for x in direction_values]
+        combined_weights = [x+y for x, y in zip(combined_weights, direction_values)]
+        # propagate zeros
+        combined_weights = [0 if y == 0 else x for x, y in zip(combined_weights, direction_values)]
+
+    if sum(combined_weights) == 0:
+        return [0.0, 0.0, 0.0, 0.0]
+
+    return [x/sum(combined_weights) for x in combined_weights]
 
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
