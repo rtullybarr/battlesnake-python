@@ -55,8 +55,6 @@ def avoid_other_snakes(data):
     for snake in data["snakes"]["data"]:
         if snake["health"] > 0: # If snake is dead, we don't need to avoid it
             other_snakes.append(snake)
-    # unnecessary - we're already in the list of other snakes
-    #other_snakes.append(us)
 
     # possible directions we can move
     directions = [1.0, 1.0, 1.0, 1.0]
@@ -68,7 +66,7 @@ def avoid_other_snakes(data):
             # special handling for enemy snake heads
             if index == 0 and not points_equal(our_head, point):
 
-                weight = 0.0
+                weight = 0.1
                 if len(snake_points) < len(us_points):
                     weight = 2.0
 

@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 
 UP = 0
@@ -10,6 +11,10 @@ RIGHT = 3
 # checks if two points are equal
 def points_equal(p1, p2):
     return p1["x"] == p2["x"] and p1["y"] == p2["y"]
+
+
+def distance(p1, p2):
+    return math.sqrt(math.pow(p1["x"] - p2["x"], 2) + math.pow(p1["y"] - p2["y"], 2))
 
 
 # returns a new point that has been shifted one step in the given direction.
@@ -24,6 +29,27 @@ def move_point(point, direction):
     if direction == RIGHT:
         new_point["x"] += 1
     return new_point
+
+
+def move_towards(head, point):
+    # returns weights for directions to move towards a point
+    directions = [0.1, 0.1, 0.1, 0.1]
+    # above
+    if head["y"] < point["y"]:
+        directions[DOWN] = 1.0
+
+    # below
+    if head["y"] > point["y"]:
+        directions[UP] = 1.0
+
+    # to the left
+    if head["x"] < point["x"]:
+        directions[RIGHT] = 1.0
+
+    if head["x"] > point["x"]:
+        directions[LEFT] = 1.0
+
+    return directions
 
 
 # not really a movement function, but turns the world into a grid that's easier to work with
