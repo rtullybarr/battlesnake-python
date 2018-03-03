@@ -114,12 +114,13 @@ def combine_weights_add(weights):
         direction_values = [x*criteria_weight for x in direction_values]
         combined_weights = [x+y for x, y in zip(combined_weights, direction_values)]
         # propagate zeros
-        combined_weights = [0 if y == 0 else x for x, y in zip(combined_weights, direction_values)]
+        combined_weights = [0 if x == 0 or y == 0 else x for x, y in zip(combined_weights, direction_values)]
 
     if sum(combined_weights) == 0:
         return [0.0, 0.0, 0.0, 0.0]
 
     return [x/sum(combined_weights) for x in combined_weights]
+
 
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
