@@ -1,8 +1,8 @@
 import movement
 
 
-def nearest_food_simple(data):
-    criteria = {"goal": "nearest_food_simple", "weight": 0.1}
+def nearest_food_simple(data, weight):
+    criteria = {"goal": "nearest_food_simple", "weight": weight}
     # picks closest food and gives direction towards it.
     food = data["food"]["data"]
     head = data["you"]["body"]["data"][0]

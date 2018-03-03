@@ -80,10 +80,10 @@ def get_direction_weights(data):
     weights = list()
 
     # The direction weights and decision weights added at the same time,
-    weights.append(collisions.avoid_walls(data))
-    weights.append(collisions.avoid_other_snakes(data))
-    weights.append(freedom.move_to_most_space(data))
-    weights.append(food.nearest_food_simple(data))
+    weights.append(collisions.avoid_walls(data, 1))
+    weights.append(collisions.avoid_other_snakes(data, 10))
+    weights.append(freedom.move_to_most_space(data, 8))
+    weights.append(food.nearest_food_simple(data, 3))
 
     return combine_weights(weights)
 

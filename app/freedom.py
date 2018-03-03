@@ -3,7 +3,7 @@ import numpy as np
 import collections
 
 
-def move_to_most_space(data):
+def move_to_most_space(data, weight):
     criteria = {"goal": "move_to_most_space", "weight": 0.2}
 
     directions = [1.0, 1.0, 1.0, 1.0]

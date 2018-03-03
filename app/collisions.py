@@ -2,8 +2,8 @@ from movement import UP, DOWN, LEFT, RIGHT, points_equal, move_point
 
 
 # set of weighting fuctions designed to help us avoid collisions.
-def avoid_walls(data):
-    criteria = {"goal": "avoid_walls", "weight": 0.4}
+def avoid_walls(data, weight):
+    criteria = {"goal": "avoid_walls", "weight": weight}
     # walls: places with x, y outside the game area
 
     # where we are
@@ -35,8 +35,8 @@ def avoid_walls(data):
     return criteria
 
 
-def avoid_other_snakes(data):
-    criteria = {"goal": "avoid_other_snakes", "weight": 0.4}
+def avoid_other_snakes(data, weight):
+    criteria = {"goal": "avoid_other_snakes", "weight": weight}
     # walls: places with x, y outside the game area
 
     # where we are
