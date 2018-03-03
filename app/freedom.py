@@ -32,45 +32,39 @@ def reachable_area(head, grid):
     while len(unvisited) > 0:
         point = unvisited.pop()
 
-        empty_or_food = True
-
         shape = grid.shape
         if point["x"] < 0 or point["x"] >= shape[0]:
-            empty_or_food = False
+            continue
 
         if point["y"] < 0 or point["y"] >= shape[1]:
-            empty_or_food = False
+            continue
 
         if grid[point["x"]][point["y"]] == movement.SNAKE:
-            empty_or_food = False
+            continue
 
         if grid[point["x"]][point["y"]] == movement.VISITED:
-            empty_or_food = False
+            continue
 
-        if empty_or_food:
-            grid[point["x"]][point["y"]] = movement.VISITED
-            visited_area += 1
+        grid[point["x"]][point["y"]] = movement.VISITED
+        visited_area += 1
 
-            for i in range(4):
-                new_point = movement.move_point(point, i)
+        for i in range(4):
+            new_point = movement.move_point(point, i)
 
-                empty_or_food = True
+            shape = grid.shape
+            if point["x"] < 0 or point["x"] >= shape[0]:
+                continue
 
-                shape = grid.shape
-                if point["x"] < 0 or point["x"] >= shape[0]:
-                    empty_or_food = False
+            if point["y"] < 0 or point["y"] >= shape[1]:
+                continue
 
-                if point["y"] < 0 or point["y"] >= shape[1]:
-                    empty_or_food = False
+            if grid[point["x"]][point["y"]] == movement.SNAKE:
+                continue
 
-                if grid[point["x"]][point["y"]] == movement.SNAKE:
-                    empty_or_food = False
+            if grid[point["x"]][point["y"]] == movement.VISITED:
+                continue
 
-                if grid[point["x"]][point["y"]] == movement.VISITED:
-                    empty_or_food = False
-
-                if empty_or_food:
-                    unvisited.append(new_point)
+            unvisited.append(new_point)
 
     return visited_area
 
