@@ -82,7 +82,7 @@ def get_direction_weights(data):
     # The direction weights and decision weights added at the same time,
     weights.append(collisions.avoid_walls(data, 1))
     weights.append(collisions.avoid_other_snakes(data, 10))
-    weights.append(freedom.move_to_most_space(data, 8))
+    weights.append(freedom.move_to_most_space(data, 4))
 
     longest_snake = 0
     our_snake = len(data["you"]["body"]["data"])
@@ -92,11 +92,11 @@ def get_direction_weights(data):
             longest_snake = len(snake["body"]["data"])
 
     if our_snake < longest_snake:
-        food_priority = 7
+        food_priority = 3
     else:
         food_priority = (1.0 / data["you"]["health"]) * 10
 
-    weights.append(food.nearest_food_simple(data, food_priority))
+    weights.append(food.nearest_food_a_star(data, food_priority))
 
     print(weights)
 
