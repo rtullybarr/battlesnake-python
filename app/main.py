@@ -111,10 +111,13 @@ def combine_weights_add(weights):
     for criteria in weights:
         criteria_weight = criteria["weight"]
         direction_values = criteria["direction_values"]
-        direction_values = [x*criteria_weight for x in direction_values]
-        combined_weights = [x+y for x, y in zip(combined_weights, direction_values)]
-        # propagate zeros
-        combined_weights = [0 if x == 0 or y == 0 else x for x, y in zip(combined_weights, direction_values)]
+
+        for i in range(4):
+            new_val = direction_values[i]*criteria_weight
+            if new_val == 0:
+                combined_weights[i] = 0
+            elif combined_weights[0] != 0:
+                combined_weights[i] += new_val
 
     if sum(combined_weights) == 0:
         return [0.0, 0.0, 0.0, 0.0]
