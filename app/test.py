@@ -1,5 +1,6 @@
 import main
 import time
+import movement
 
 
 def run_tests(data):
@@ -8,6 +9,8 @@ def run_tests(data):
 
     print("make sure move throws no errors")
     print(main.execute_move(data))
+
+    grid = movement.get_grid(data)
 
     end = time.time()
 

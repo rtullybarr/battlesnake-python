@@ -1,5 +1,5 @@
 import movement
-from movement import UP, DOWN, LEFT, RIGHT
+from Queue import PriorityQueue
 
 
 def nearest_food_simple(data, weight):
@@ -10,22 +10,29 @@ def nearest_food_simple(data, weight):
     width = data["width"]
     height = data["height"]
 
-    min_dist = width * height
-    nearest_food = None
+    nearest = nearest_food(head, food, width*height)
+
+    directions = [0.1, 0.1, 0.1, 0.1]
+    if nearest is not None:
+        directions = movement.move_towards(head, nearest)
+
+    criteria["direction_values"] = directions
+
+    return criteria
+
+
+def nearest_food(head, food, max):
+    min_dist = max
+    nearest = None
 
     for point in food:
         distance = movement.distance(head, point)
         if distance < min_dist:
             min_dist = distance
-            nearest_food = point
+            nearest = point
 
-    directions = [0.1, 0.1, 0.1, 0.1]
-    if nearest_food is not None:
-        directions = movement.move_towards(head, nearest_food)
+    return nearest
 
-    criteria["direction_values"] = directions
-
-    return criteria
 
 def nearest_food_a_star(data, food_weight):
     criteria = {"goal": "find_nearet_food", "weight": food_weight} # TODO: we could vary weight depending on our snake's health
@@ -34,10 +41,21 @@ def nearest_food_a_star(data, food_weight):
     us = data["you"]
     # first point in list is our head.
     our_head = us["body"]["data"][0]
+    food = data["food"]["data"]
+    width = data["width"]
+    height = data["height"]
 
-    # possible directions we can move
-    directions = [1.0, 1.0, 1.0, 1.0]
+    goal = nearest_food(our_head, food, width*height)
+    path = a_star(our_head, goal, movement.get_grid(data))
 
+    print len(path)
+    if len(path) == 0:
+        directions = [1.0, 1.0, 1.0, 1.0]
+    else:
+        first = path[0]
+        first_point = {"x": first[0], "y": first[1]}
+
+        directions = movement.move_towards(our_head, first_point)
 
     # normalize weighting matrix
     if sum(directions) == 0:
@@ -47,26 +65,31 @@ def nearest_food_a_star(data, food_weight):
 
     return criteria
 
-def a_star(start, goal):
+
+def to_tuple(point):
+    return (point["x"], point["y"])
+
+
+def a_star(start, goal, grid):
     closedList = [] # Squares we don't need to consider anymore
     openList = PriorityQueue() # Squares we do need to consider
     openList.put((0, start))
-    cameFrom = {}
+    came_from = {}
+    cost_so_far = {}
+
+    came_from[to_tuple(start)] = None
+    cost_so_far[to_tuple(start)] = 0
 
     while not openList.empty():
         current = openList.get() # Remove square with lowest f score
+        current_point = current[1]
         closedList.append(current) # add current square to closed list
 
-        # If we added the destination to the closed list, we've found a path
-        if any(current['x'] == p['x'] and current['y'] == p['y'] for p in closedList):
+        if goal["x"] == current_point["x"] and goal["y"] == current_point["y"]:
             break
 
-        # Get all adjacent squares
-        if current == goal:
-            break
-
-         for i in range(4):
-            new_point = movement.move_point(current, i)
+        for i in range(4):
+            new_point = movement.move_point(current_point, i)
 
             shape = grid.shape
             if new_point["x"] < 0 or new_point["x"] >= shape[0]:
@@ -78,15 +101,39 @@ def a_star(start, goal):
             if grid[new_point["x"]][new_point["y"]] == movement.SNAKE:
                 continue
 
-        if current in closedList
-        
+            new_cost = cost_so_far[to_tuple(current_point)] + 1
 
+            if to_tuple(new_point) not in cost_so_far or new_cost < cost_so_far[to_tuple(new_point)]:
+                cost_so_far[to_tuple(new_point)] = new_cost
+                priority = new_cost + manhattan_distance(current_point, new_point)
+                openList.put((priority, new_point))
+                came_from[to_tuple(new_point)] = to_tuple(current_point)
+
+        return build_path(start, goal, came_from)
+
+
+def build_path(start, goal, came_from):
+    current_point = to_tuple(goal)
+    path = list()
+
+    print(came_from)
+
+    while current_point != to_tuple(start):
+        if current_point in came_from:
+            path.append(current_point)
+            current_point = came_from[current_point]
+        else:
+            break
+
+    path.reverse()
+
+    return path
 
 # to calculate g, add 1 to G of its parent
     # G is movement cost from start point to current square
     # H is estimated movement cost from the current square to the destination (heuristic)
 
 # F is score of each square. F = G + H
-def manhattan
+def manhattan_distance(p1, p2):
 
-    if current 
+    return abs(p1["x"] - p2["x"]) + abs(p1["y"] - p2["y"])
