@@ -4,6 +4,7 @@ import random
 
 import collisions
 import freedom
+import food
 
 
 @bottle.route('/')
@@ -82,6 +83,7 @@ def get_direction_weights(data):
     weights.append(collisions.avoid_walls(data))
     weights.append(collisions.avoid_other_snakes(data))
     weights.append(freedom.move_to_most_space(data))
+    weights.append(food.nearest_food_simple(data))
 
     return combine_weights(weights)
 
