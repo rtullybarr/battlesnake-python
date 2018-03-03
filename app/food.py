@@ -35,7 +35,7 @@ def nearest_food(head, food, max):
 
 
 def nearest_food_a_star(data, food_weight):
-    criteria = {"goal": "find_nearet_food", "weight": food_weight} # TODO: we could vary weight depending on our snake's health
+    criteria = {"goal": "find_nearest_food", "weight": food_weight} # TODO: we could vary weight depending on our snake's health
 
     # where we are
     us = data["you"]
@@ -48,7 +48,6 @@ def nearest_food_a_star(data, food_weight):
     goal = nearest_food(our_head, food, width*height)
     path = a_star(our_head, goal, movement.get_grid(data))
 
-    print len(path)
     if len(path) == 0:
         directions = [1.0, 1.0, 1.0, 1.0]
     else:
@@ -105,18 +104,18 @@ def a_star(start, goal, grid):
 
             if to_tuple(new_point) not in cost_so_far or new_cost < cost_so_far[to_tuple(new_point)]:
                 cost_so_far[to_tuple(new_point)] = new_cost
-                priority = new_cost + manhattan_distance(current_point, new_point)
+                priority = new_cost + manhattan_distance(new_point, goal)
                 openList.put((priority, new_point))
                 came_from[to_tuple(new_point)] = to_tuple(current_point)
 
-        return build_path(start, goal, came_from)
+    return build_path(start, goal, came_from)
 
 
 def build_path(start, goal, came_from):
     current_point = to_tuple(goal)
     path = list()
 
-    print(came_from)
+    #print(came_from)
 
     while current_point != to_tuple(start):
         if current_point in came_from:
