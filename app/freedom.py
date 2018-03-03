@@ -52,19 +52,25 @@ def reachable_area(head, grid):
             new_point = movement.move_point(point, i)
 
             shape = grid.shape
-            if point["x"] < 0 or point["x"] >= shape[0]:
+            if new_point["x"] < 0 or new_point["x"] >= shape[0]:
                 continue
 
-            if point["y"] < 0 or point["y"] >= shape[1]:
+            if new_point["y"] < 0 or new_point["y"] >= shape[1]:
                 continue
 
-            if grid[point["x"]][point["y"]] == movement.SNAKE:
+            if grid[new_point["x"]][new_point["y"]] == movement.SNAKE:
                 continue
 
-            if grid[point["x"]][point["y"]] == movement.VISITED:
+            if grid[new_point["x"]][new_point["y"]] == movement.VISITED:
+                continue
+
+            # limit to within 10 points around our head to avoid timing out.
+            if abs(head["x"] - new_point["x"]) > 7:
+                continue
+
+            if abs(head["y"] - new_point["y"]) > 7:
                 continue
 
             unvisited.append(new_point)
 
     return visited_area
-
