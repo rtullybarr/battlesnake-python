@@ -64,11 +64,11 @@ def reachable_area(head, grid):
             if grid[new_point["x"]][new_point["y"]] == movement.VISITED:
                 continue
 
-            # limit to within 10 points around our head to avoid timing out.
-            if abs(head["x"] - new_point["x"]) > 7:
+            # limit to within 8 points around our head to avoid timing out.
+            if abs(head["x"] - new_point["x"]) > 8:
                 continue
 
-            if abs(head["y"] - new_point["y"]) > 7:
+            if abs(head["y"] - new_point["y"]) > 8:
                 continue
 
             unvisited.append(new_point)
