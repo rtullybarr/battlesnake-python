@@ -91,8 +91,8 @@ def avoid_other_snakes(data, weight):
 def follow_tail(data, weight):
     criteria = {"goal": "follow_our_tail", "weight": weight}
 
-    head = data["you"]["data"]["body"]["data"][0]
-    tail = data["you"]["data"]["body"]["data"][-1]
+    head = data["you"]["body"]["data"][0]
+    tail = data["you"]["body"]["data"][-1]
 
     directions = move_towards(head, tail)
 
