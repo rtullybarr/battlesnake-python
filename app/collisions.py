@@ -50,8 +50,11 @@ def avoid_other_snakes(data):
     moves = [move_point(our_head, UP), move_point(our_head, DOWN),
              move_point(our_head, LEFT), move_point(our_head, RIGHT)]
 
+    other_snakes = []
     # other snakes
-    other_snakes = data["snakes"]["data"]
+    for snake in data["snakes"]["data"]:
+        if snake["health"] > 0: # If snake is dead, we don't need to avoid it
+            other_snakes.append(snake)
     # unnecessary - we're already in the list of other snakes
     #other_snakes.append(us)
 
