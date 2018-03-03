@@ -27,7 +27,7 @@ if __name__ == "__main__":
         ],
         "object": "list"
       },
-      "height": 20,
+      "height": 100,
       "id": 1,
       "object": "world",
       "snakes": {
@@ -92,7 +92,7 @@ if __name__ == "__main__":
         "object": "list"
       },
       "turn": 0,
-      "width": 20,
+      "width": 100,
       "you": {
         "body": {
           "data": [

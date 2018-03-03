@@ -21,25 +21,39 @@ def move_to_most_space(data):
     return criteria
 
 
-def reachable_area(point, grid):
-
-    # base cases
+def empty_or_food(point, grid):
     shape = grid.shape
     if point["x"] < 0 or point["x"] >= shape[0]:
-        return 0
+        return False
 
     if point["y"] < 0 or point["y"] >= shape[1]:
-        return 0
+        return False
 
-    if grid[point["x"]][point["y"]] == movement.SNAKE or grid[point["x"]][point["y"]] == movement.VISITED:
-        return 0
+    if grid[point["x"]][point["y"]] == movement.SNAKE:
+        return False
 
-    # mark this point as visited
-    grid[point["x"]][point["y"]] = movement.VISITED
-    # count ourselves
-    area = 1
+    if grid[point["x"]][point["y"]] == movement.VISITED:
+        return False
 
-    for i in range(4):
-        area += reachable_area(movement.move_point(point, i), grid)
 
-    return area
+def reachable_area(head, grid):
+
+    # replace with queue impl
+    unvisited = list()
+    unvisited.append(head)
+    visited_area = 0
+
+    while len(unvisited) > 0:
+        point = unvisited.pop()
+
+        if empty_or_food(point, grid):
+            grid[point["x"]][point["y"]] = movement.VISITED
+            visited_area += 1
+
+            for i in range(4):
+                new_point = movement.move_point(point, i)
+                if empty_or_food(new_point, grid):
+                    unvisited.append(new_point)
+
+    return visited_area
+
