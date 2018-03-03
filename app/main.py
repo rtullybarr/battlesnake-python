@@ -87,14 +87,14 @@ def get_direction_weights(data):
     longest_snake = 0
     our_snake = len(data["you"]["body"]["data"])
 
-    for snake in data["snakes"]:
+    for snake in data["snakes"]["data"]:
         if len(snake["body"]["data"]) > longest_snake:
             longest_snake = len(snake["body"]["data"])
 
     if our_snake < longest_snake:
         food_priority = 7
     else:
-        food_priority = (1 / data["you"]["hunger"]) * 10
+        food_priority = (1 / data["you"]["health"]) * 10
 
     weights.append(food.nearest_food_simple(data, food_priority))
 
