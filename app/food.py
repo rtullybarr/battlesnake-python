@@ -46,7 +46,10 @@ def nearest_food_a_star(data, food_weight):
     height = data["height"]
 
     goal = nearest_food(our_head, food, width*height)
-    path = a_star(our_head, goal, movement.get_grid(data))
+
+    path = list()
+    if goal is not None:
+        path = a_star(our_head, goal, movement.get_grid(data))
 
     if len(path) == 0:
         directions = [1.0, 1.0, 1.0, 1.0]
