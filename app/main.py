@@ -63,7 +63,7 @@ def execute_move(data):
 
     return {
         'move': directions[index],
-        'taunt': weights_string
+        'taunt': 'noodly noodly'
     }
 
 
