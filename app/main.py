@@ -21,7 +21,7 @@ def static(path):
 def start():
     data = bottle.request.json
 
-    head_url = '%s://%s/static/head.png' % (
+    head_url = '%s://%s/static/snake-in-hats.png' % (
         bottle.request.urlparts.scheme,
         bottle.request.urlparts.netloc
     )
