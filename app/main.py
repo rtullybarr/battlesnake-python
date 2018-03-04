@@ -21,7 +21,7 @@ def static(path):
 def start():
     data = bottle.request.json
 
-    head_url = '%s://%s/static/fhead.png' % (
+    head_url = '%s://%s/static/head.png' % (
         bottle.request.urlparts.scheme,
         bottle.request.urlparts.netloc
     )
@@ -92,7 +92,7 @@ def get_direction_weights(data):
             longest_snake = len(snake["body"]["data"])
 
     health = data["you"]["health"]
-    if our_snake < longest_snake:
+    if our_snake <= longest_snake:
         weights.append(food.nearest_food_a_star(data, (1.0 / health) * 10))
     elif health > 70:
         weights.append(collisions.follow_tail(data, 3))
