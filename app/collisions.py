@@ -73,7 +73,7 @@ def avoid_other_snakes(data, weight):
             if index == 0 and not points_equal(our_head, snake_points[index]):
 
                 # weight if other snake is bigger than us
-                weight = 0.0
+                weight = 0.01
                 if len(snake_points) < len(us_points):
                     # weight if other snake is smaller than us
                     weight = 2.0
