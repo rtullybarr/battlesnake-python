@@ -85,7 +85,7 @@ def get_direction_weights(data):
     longest_snake = 0
     our_snake = len(data["you"]["body"]["data"])
 
-    for snake in data["snakes"]["data"]:
+    for snake in data["board"]["snakes"]:
         if len(snake["body"]["data"]) > longest_snake:
             longest_snake = len(snake["body"]["data"])
 

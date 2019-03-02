@@ -62,7 +62,7 @@ VISITED = 3.0
 def get_grid(data):
     grid = np.zeros((data["width"], data["height"]))
 
-    for snake in data["snakes"]["data"]:
+    for snake in data["board"]["snakes"]:
         if snake["health"] <= 0:
             continue
         for i, point in enumerate(snake["body"]["data"]):

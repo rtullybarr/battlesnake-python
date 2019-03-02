@@ -53,8 +53,9 @@ def avoid_other_snakes(data, weight):
 
     other_snakes = []
     # other snakes
-    for snake in data["snakes"]:
-        if snake["health"] > 0: # If snake is dead, we don't need to avoid it
+    for snake in data["board"]["snakes"]:
+        if snake["health"] > 0:
+            # If snake is dead, we don't need to avoid it
             other_snakes.append(snake)
 
     # possible directions we can move
