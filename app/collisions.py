@@ -1,4 +1,4 @@
-from movement import UP, DOWN, LEFT, RIGHT, points_equal, move_point, move_towards
+from app.movement import UP, DOWN, LEFT, RIGHT, points_equal, move_point, move_towards
 
 
 # set of weighting fuctions designed to help us avoid collisions.

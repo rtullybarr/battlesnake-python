@@ -1,6 +1,6 @@
-import main
+import app.main as main
 import time
-import movement
+import app.movement as movement
 
 
 def run_tests(data):

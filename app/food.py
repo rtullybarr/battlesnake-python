@@ -1,4 +1,4 @@
-import movement
+import app.movement as movement
 from Queue import PriorityQueue
 
 

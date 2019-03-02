@@ -2,9 +2,9 @@ import bottle
 import os
 import random
 
-import collisions
-import freedom
-import food
+import app.collisions as collisions
+import app.freedom as freedom
+import app.food as food
 
 
 @bottle.route('/')
