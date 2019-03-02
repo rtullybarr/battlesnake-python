@@ -1,5 +1,5 @@
 import app.movement as movement
-from queue import PriorityQueue
+from Queue import PriorityQueue
 
 
 def nearest_food_simple(data, weight):
