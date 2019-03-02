@@ -90,6 +90,10 @@ def get_direction_weights(data):
             longest_snake = len(snake["body"])
 
     health = data["you"]["health"]
+    if health == 0:
+        # we are dead
+        return [1.0, 1.0, 1.0, 1.0]
+
     if our_snake <= longest_snake:
         weights.append(food.nearest_food_a_star(data, (1.0 / health) * 10))
     elif health > 70:
