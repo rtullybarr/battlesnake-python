@@ -1,5 +1,5 @@
 import app.movement as movement
-from Queue import PriorityQueue
+from queue import PriorityQueue
 
 
 def nearest_food_simple(data, weight):
@@ -134,6 +134,7 @@ def build_path(start, goal, came_from):
 # to calculate g, add 1 to G of its parent
     # G is movement cost from start point to current square
     # H is estimated movement cost from the current square to the destination (heuristic)
+
 
 # F is score of each square. F = G + H
 def manhattan_distance(p1, p2):
