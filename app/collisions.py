@@ -78,7 +78,7 @@ def avoid_other_snakes(data, weight):
                 for i in range(4):
                     for j in range(4):
                         # be more conservative about enemy snake heads
-                        if distance(moves[i], move_point(snake_points[index], j)) < 3.0:
+                        if distance(moves[i], move_point(snake_points[index], j)) < 2.2:
                             if weight == 0.1 and points_equal(moves[i], move_point(snake_points[index], j)):
                                 # don't die
                                 directions[i] = 0.0
