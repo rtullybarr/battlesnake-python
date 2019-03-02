@@ -58,6 +58,9 @@ def avoid_other_snakes(data, weight):
             # If snake is dead, we don't need to avoid it
             other_snakes.append(snake)
 
+    # in case we aren't in list
+    other_snakes.append(us)
+
     # possible directions we can move
     directions = [1.0, 1.0, 1.0, 1.0]
 
