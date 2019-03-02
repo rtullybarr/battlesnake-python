@@ -9,7 +9,7 @@ def avoid_walls(data, weight):
     # where we are
     us = data["you"]
     # first point in list is our head.
-    our_head = us["body"]["data"][0]
+    our_head = us["body"][0]
 
     # possible directions we can move
     directions = [1.0, 1.0, 1.0, 1.0]

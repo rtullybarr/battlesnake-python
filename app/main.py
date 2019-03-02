@@ -58,12 +58,10 @@ def execute_move(data):
     if max_weight == 0:
         return {
             'move': directions[index],
-            'taunt': 'x___x'
         }
 
     return {
         'move': directions[index],
-        'taunt': 'noodly noodly'
     }
 
 
