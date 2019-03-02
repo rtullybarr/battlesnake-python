@@ -5,8 +5,8 @@ from Queue import PriorityQueue
 def nearest_food_simple(data, weight):
     criteria = {"goal": "nearest_food_simple", "weight": weight}
     # picks closest food and gives direction towards it.
-    food = data["food"]["data"]
-    head = data["you"]["body"]["data"][0]
+    food = data["board"]["food"]
+    head = data["you"]["body"][0]
     width = data["width"]
     height = data["height"]
 
@@ -40,10 +40,10 @@ def nearest_food_a_star(data, food_weight):
     # where we are
     us = data["you"]
     # first point in list is our head.
-    our_head = us["body"]["data"][0]
-    food = data["food"]["data"]
-    width = data["width"]
-    height = data["height"]
+    our_head = us["body"][0]
+    food = data["board"]["food"]
+    width = data["board"]["width"]
+    height = data["board"]["height"]
 
     goal = nearest_food(our_head, food, width*height)
 

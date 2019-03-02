@@ -83,11 +83,11 @@ def get_direction_weights(data):
     weights.append(freedom.move_to_most_space(data, 4))
 
     longest_snake = 0
-    our_snake = len(data["you"]["body"]["data"])
+    our_snake = len(data["you"]["body"])
 
     for snake in data["board"]["snakes"]:
-        if len(snake["body"]["data"]) > longest_snake:
-            longest_snake = len(snake["body"]["data"])
+        if len(snake["body"]) > longest_snake:
+            longest_snake = len(snake["body"])
 
     health = data["you"]["health"]
     if our_snake <= longest_snake:

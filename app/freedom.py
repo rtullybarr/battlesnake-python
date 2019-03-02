@@ -8,7 +8,7 @@ def move_to_most_space(data, weight):
 
     directions = [1.0, 1.0, 1.0, 1.0]
 
-    head = data["you"]["body"]["data"][0]
+    head = data["you"]["body"][0]
     grid = movement.get_grid(data)
 
     for i in range(4):
