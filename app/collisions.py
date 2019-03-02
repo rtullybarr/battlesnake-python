@@ -1,4 +1,4 @@
-from app.movement import UP, DOWN, LEFT, RIGHT, points_equal, move_point, move_towards
+from app.movement import UP, DOWN, LEFT, RIGHT, points_equal, move_point, move_towards, distance
 
 
 # set of weighting fuctions designed to help us avoid collisions.
@@ -77,7 +77,8 @@ def avoid_other_snakes(data, weight):
 
                 for i in range(4):
                     for j in range(4):
-                        if points_equal(moves[i], move_point(snake_points[index], j)):
+                        # be more conservative about enemy snake heads
+                        if distance(moves[i], move_point(snake_points[index], j)) < 2:
                             directions[i] = weight
 
             for i in range(4):
