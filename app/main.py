@@ -49,7 +49,7 @@ def execute_move(data):
     directions = ['up', 'down', 'left', 'right']
     direction_weights = get_direction_weights(data)
     weights_string = str.format("up: {0:.2f}, down: {1:.2f}, left: {2:.2f}, right: {3:.2f}",
-                            direction_weights[0], direction_weights[1], direction_weights[2], direction_weights[3])
+                                direction_weights[0], direction_weights[1], direction_weights[2], direction_weights[3])
     print(weights_string)
 
     # get index of maximum value in direction_weights

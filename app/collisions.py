@@ -8,19 +8,20 @@ def avoid_walls(data, weight):
 
     # where we are
     us = data["you"]
+    board = data["board"]
     # first point in list is our head.
     our_head = us["body"][0]
 
     # possible directions we can move
     directions = [1.0, 1.0, 1.0, 1.0]
 
-    if our_head["x"] + 1 >= data["width"]:
+    if our_head["x"] + 1 >= board["width"]:
         directions[RIGHT] = 0.0
 
     if our_head["x"] - 1 < 0:
         directions[LEFT] = 0.0
 
-    if our_head["y"] + 1 >= data["height"]:
+    if our_head["y"] + 1 >= board["height"]:
         directions[DOWN] = 0.0
 
     if our_head["y"] - 1 < 0:
@@ -42,7 +43,7 @@ def avoid_other_snakes(data, weight):
     # where we are
     us = data["you"]
     # first point in list is our head.
-    us_points = us["body"]["data"]
+    us_points = us["body"]
     our_head = us_points[0]
 
     # spots we could move:
@@ -52,7 +53,7 @@ def avoid_other_snakes(data, weight):
 
     other_snakes = []
     # other snakes
-    for snake in data["snakes"]["data"]:
+    for snake in data["snakes"]:
         if snake["health"] > 0: # If snake is dead, we don't need to avoid it
             other_snakes.append(snake)
 
@@ -60,7 +61,7 @@ def avoid_other_snakes(data, weight):
     directions = [1.0, 1.0, 1.0, 1.0]
 
     for snake in other_snakes:
-        snake_points = snake["body"]["data"]
+        snake_points = snake["body"]
         for index, point in enumerate(snake_points):
 
             # special handling for enemy snake heads
@@ -91,8 +92,8 @@ def avoid_other_snakes(data, weight):
 def follow_tail(data, weight):
     criteria = {"goal": "follow_our_tail", "weight": weight}
 
-    head = data["you"]["body"]["data"][0]
-    tail = data["you"]["body"]["data"][-1]
+    head = data["you"]["body"][0]
+    tail = data["you"]["body"][-1]
 
     directions = move_towards(head, tail)
 
