@@ -82,7 +82,7 @@ def avoid_other_snakes(data, weight):
                             if weight == 0.1 and points_equal(moves[i], move_point(snake_points[index], j)):
                                 # don't die
                                 directions[i] = 0.0
-                            else
+                            else:
                                 directions[i] = weight
 
             for i in range(4):
