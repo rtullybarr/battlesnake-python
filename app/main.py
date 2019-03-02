@@ -19,7 +19,6 @@ def static(path):
 
 @bottle.post('/start')
 def start():
-    data = bottle.request.json
 
     head_url = '%s://%s/static/head.png' % (
         bottle.request.urlparts.scheme,
@@ -42,6 +41,18 @@ def move():
     data = bottle.request.json
 
     return execute_move(data)
+
+
+@bottle.post('/end')
+def end():
+    # return something
+    return {}
+
+
+@bottle.post('/ping')
+def ping():
+    # return something
+    return {}
 
     
 def execute_move(data):
