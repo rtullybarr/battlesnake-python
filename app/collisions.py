@@ -63,10 +63,11 @@ def avoid_other_snakes(data, weight):
 
     for snake in other_snakes:
         snake_points = snake["body"]
-        for index, point in enumerate(snake_points):
+        # note: tail is always safe
+        for index in range(len(snake_points) - 1):
 
             # special handling for enemy snake heads
-            if index == 0 and not points_equal(our_head, point):
+            if index == 0 and not points_equal(our_head, snake_points[index]):
 
                 # weight if other snake is bigger than us
                 weight = 0.0
@@ -76,11 +77,11 @@ def avoid_other_snakes(data, weight):
 
                 for i in range(4):
                     for j in range(4):
-                        if points_equal(moves[i], move_point(point, j)):
+                        if points_equal(moves[i], move_point(snake_points[index], j)):
                             directions[i] = weight
 
             for i in range(4):
-                if points_equal(moves[i], point):
+                if points_equal(moves[i], snake_points[index]):
                     directions[i] = 0.0
 
     # normalize and return
